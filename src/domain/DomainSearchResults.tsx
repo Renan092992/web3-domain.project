@@ -179,7 +179,7 @@ const DomainSearchResults: React.FC = () => {
           </div>
 
           {/* Show More Button */}
-          <div className="flex justify-center mt-6 sm:mt-8">
+          <div className="flex justify-center mt-6 pb-[30px] sm:mt-8">
             <button className="text-white flex items-center space-x-2 text-sm sm:text-base">
               <span>Show More Domains</span>
               <svg

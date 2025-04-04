@@ -26,15 +26,6 @@ const Register: React.FC = () => {
     }
   }
 
-  const handlePaymentMethodChange = (method: 'crypto' | 'credit') => {
-    if (
-      (method === 'crypto' && !isCustodyHosted) ||
-      (method === 'credit' && isCustodyHosted)
-    ) {
-      setPaymentMethod(method)
-    }
-  }
-
   useEffect(() => {
     const state = location.state as LocationState | null
     const custodyType = state?.custody || 'self'
@@ -45,13 +36,14 @@ const Register: React.FC = () => {
 
   return (
     <div className="min-h-screen w-full fixed inset-0 bg-[#000B1E] px-4 sm:px-6 md:px-8 lg:px-[180px]">
-      {/* background image */}
+      {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${bgImage})` }}
       />
+
       {/* Logo */}
-      <div className="relative mt-[40px] group cursor-pointer">
+      <div className="relative mt-4 sm:mt-6 md:mt-8 lg:mt-[40px] group cursor-pointer">
         <img
           src={logo}
           alt="PKT Logo"
@@ -66,6 +58,47 @@ const Register: React.FC = () => {
             Claim your
             <br />
             PKT Domain
+          </div>
+
+          {/* Custody Toggle and Web3 Wallet */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 pt-4 sm:pt-6 md:pt-8 lg:pt-[24px] mb-6">
+            {/* Custody Toggle */}
+            <div className="flex items-center space-x-4 bg-white/10 rounded-full p-1.5 backdrop-blur-sm w-full sm:w-auto">
+              <button
+                onClick={() => {
+                  setIsCustodyHosted(false)
+                  setPaymentMethod('crypto')
+                }}
+                className={`flex-1 sm:flex-none px-4 py-2 rounded-full text-sm sm:text-base transition-all duration-300 ${
+                  !isCustodyHosted
+                    ? 'bg-white text-black'
+                    : 'text-white hover:bg-white/10'
+                }`}
+              >
+                Self custody
+              </button>
+              <button
+                onClick={() => {
+                  setIsCustodyHosted(true)
+                  setPaymentMethod('credit')
+                }}
+                className={`flex-1 sm:flex-none px-4 py-2 rounded-full text-sm sm:text-base transition-all duration-300 ${
+                  isCustodyHosted
+                    ? 'bg-white text-black'
+                    : 'text-white hover:bg-white/10'
+                }`}
+              >
+                Hosted custody
+              </button>
+            </div>
+
+            {/* Web3 Wallet Connect Button */}
+            <button className="flex items-center justify-center space-x-2 bg-gradient-to-r from-[#3CADEF] to-[#0D4AE7] text-white px-6 py-3 rounded-full text-sm sm:text-base relative group w-full sm:w-auto">
+              <span>Connect Web3 wallet</span>
+              <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
+                <span className="text-white text-xs">i</span>
+              </div>
+            </button>
           </div>
 
           {/* Registrar Toggle */}
@@ -91,7 +124,7 @@ const Register: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Register a domain name to start"
-              className="w-full h-full bg-transparent text-black text-sm sm:text-base placeholder:text-white/40 pl-4 sm:pl-6 md:pl-[24px] focus:outline-none rounded-full"
+              className="w-full h-full bg-transparent text-black text-sm sm:text-base placeholder:text-gray-400 pl-4 sm:pl-6 md:pl-[24px] focus:outline-none rounded-full"
             />
             <button
               onClick={handleSearch}
@@ -105,40 +138,5 @@ const Register: React.FC = () => {
     </div>
   )
 }
-
-// Add animation keyframes
-const style = document.createElement('style')
-style.textContent = `
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in {
-    opacity: 0;
-    animation: fadeIn 0.7s ease-out forwards;
-  }
-
-  .animate-fade-in-up {
-    opacity: 0;
-    animation: fadeInUp 0.7s ease-out forwards;
-  }
-
-  .delay-200 {
-    animation-delay: 0.2s;
-  }
-`
-document.head.appendChild(style)
 
 export default Register

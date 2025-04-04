@@ -66,7 +66,7 @@ const Payment: React.FC<PaymentProps> = ({
   }
 
   return (
-    <div className="w-full max-w-[480px] bg-white rounded-[24px] p-[32px]">
+    <div className="w-full max-w-[600px] bg-white rounded-[24px] p-[32px]">
       <h2 className="text-[24px] font-bold text-[#111827] border-b border-[#0D4AE7] pb-[16px] mb-[24px]">
         Payment
       </h2>
@@ -157,7 +157,10 @@ const Payment: React.FC<PaymentProps> = ({
                 placeholder="Cardholder's name"
                 value={cardData.cardholderName}
                 onChange={(e) =>
-                  setCardData({ ...cardData, cardholderName: e.target.value })
+                  setCardData({
+                    ...cardData,
+                    cardholderName: e.target.value
+                  })
                 }
                 className={getInputClassName(cardData.cardholderName)}
               />

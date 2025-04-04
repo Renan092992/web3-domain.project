@@ -32,7 +32,7 @@ const DomainRegistration: React.FC = () => {
   }
 
   return (
-    <div className="fixed w-full inset-0 bg-[#000B1E] px-[180px] overflow-auto">
+    <div className="fixed w-full inset-0 bg-[#000B1E] md:px-[180px] px-[20px] overflow-auto">
       {/* background image */}
       <div
         className="absolute inset-0 bg-cover bg-left-top bg-no-repeat"
@@ -45,30 +45,32 @@ const DomainRegistration: React.FC = () => {
 
       {/* Main content */}
       <div className="w-[100%] h-[calc(100%-104px)] flex justify-center items-center ">
-        <div className="relative w-full max-w-[560px] min-w-[340px] h-[640px] ">
+        <div className="relative w-full max-w-[600px] min-w-[360px] h-[640px] ">
           {/* White card container */}
-          <div className="w-full bg-white rounded-[24px] p-[32px] shadow-xl">
-            {step === 'form' && (
-              <div className="space-y-[24px]">
-                <h2 className="text-[24px] font-bold text-[#111827] border-b border-[#E5E7EB] pb-[16px]">
-                  Fill out the form
-                </h2>
-                <RegistrationForm
-                  onSubmit={handleFormSubmit}
-                  initialData={formData}
-                  className="space-y-[16px]"
+          <div className=" bg-slate-400/40 p-[10px] rounded-[30px]">
+            <div className="w-full bg-white rounded-[24px] p-[32px] shadow-xl">
+              {step === 'form' && (
+                <div className="space-y-[24px]">
+                  <h2 className="text-[24px] font-bold text-[#111827] border-b border-[#E5E7EB] pb-[16px]">
+                    Fill out the form
+                  </h2>
+                  <RegistrationForm
+                    onSubmit={handleFormSubmit}
+                    initialData={formData}
+                    className="space-y-[16px]"
+                  />
+                </div>
+              )}
+              {step === 'payment' && (
+                <Payment
+                  onSubmit={handlePaymentSubmit}
+                  onBack={() => setStep('form')}
                 />
-              </div>
-            )}
-            {step === 'payment' && (
-              <Payment
-                onSubmit={handlePaymentSubmit}
-                onBack={() => setStep('form')}
-              />
-            )}
-            {(step === 'processing' || step === 'complete') && (
-              <RegistrationStatus step={step} domainId="299" />
-            )}
+              )}
+              {(step === 'processing' || step === 'complete') && (
+                <RegistrationStatus step={step} domainId="299" />
+              )}
+            </div>
           </div>
         </div>
       </div>
