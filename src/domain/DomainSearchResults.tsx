@@ -52,24 +52,28 @@ const DomainSearchResults: React.FC = () => {
   }
 
   return (
-    <div className="fixed w-full inset-0 bg-[#000B1E] px-[180px] overflow-auto">
+    <div className="fixed w-full inset-0 bg-[#000B1E] px-4 sm:px-6 md:px-8 lg:px-[180px] overflow-auto">
       {/* background image */}
       <div
-        className="absolute inset-0 bg-cover bg-left-top bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${bgImage})` }}
       />
       {/* Logo */}
-      <div className="relative mt-[40px] group cursor-pointer">
-        <img src={logo} alt="PKT Logo" className="w-[67px] h-[64px]" />
+      <div className="relative mt-4 sm:mt-6 md:mt-8 lg:mt-[40px] group cursor-pointer">
+        <img
+          src={logo}
+          alt="PKT Logo"
+          className="w-12 h-12 sm:w-16 sm:h-16 md:w-[67px] md:h-[64px]"
+        />
       </div>
 
       <div className="relative min-h-screen w-full">
-        <div className="w-[100%] mt-[64px]  ">
+        <div className="w-full mt-8 sm:mt-12 md:mt-16 lg:mt-[64px]">
           {/* Custody Type Toggle */}
-          <div className="flex space-x-2 mb-6">
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 mb-4 sm:mb-6">
             <button
               onClick={() => setCustodyType('custody')}
-              className={`px-8 py-2 rounded-full transition-all duration-300 text-[16px] bg-gradient-to-r from-[#3CADEF] via-[#3CADEF] to-[#339DDB] text-white ${
+              className={`px-4 sm:px-8 py-2 rounded-full transition-all duration-300 text-sm sm:text-base bg-gradient-to-r from-[#3CADEF] via-[#3CADEF] to-[#339DDB] text-white ${
                 custodyType === 'custody' ? ' opacity-100 ' : ' opacity-70'
               }`}
             >
@@ -77,7 +81,7 @@ const DomainSearchResults: React.FC = () => {
             </button>
             <button
               onClick={() => setCustodyType('hosted')}
-              className={`px-8 py-2 rounded-full transition-all duration-300 text-[16px] bg-gradient-to-r from-[#3CADEF] via-[#3CADEF] to-[#339DDB] text-white ${
+              className={`px-4 sm:px-8 py-2 rounded-full transition-all duration-300 text-sm sm:text-base bg-gradient-to-r from-[#3CADEF] via-[#3CADEF] to-[#339DDB] text-white ${
                 custodyType === 'hosted' ? ' opacity-100 ' : ' opacity-70'
               }`}
             >
@@ -86,50 +90,50 @@ const DomainSearchResults: React.FC = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="relative w-full h-[64px] flex items-center bg-white/[0.05] rounded-full backdrop-blur-[20px] mt-[36px]">
+          <div className="relative w-full h-12 sm:h-14 md:h-16 lg:h-[64px] flex items-center bg-white rounded-full backdrop-blur-[20px] mt-4 sm:mt-6 md:mt-8 lg:mt-[36px]">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-full bg-transparent bg-white text-black text-[16px] placeholder:text-white/40 pl-[24px] focus:outline-none rounded-full"
+              className="w-full h-full bg-transparent text-black text-sm sm:text-base placeholder:text-white/40 pl-4 sm:pl-6 md:pl-[24px] focus:outline-none rounded-full"
               placeholder="Search for a domain"
             />
             <button
               onClick={handleSearch}
-              className="absolute right-[4px] px-[48px] py-[16px] text-[18px] text-white rounded-full bg-[#0D4AE7]   font-normal"
+              className="absolute right-1 sm:right-[4px] px-4 sm:px-6 md:px-[48px] py-2 sm:py-3 md:py-[16px] text-sm sm:text-base md:text-[18px] text-white rounded-full bg-[#0D4AE7] font-normal"
             >
               Search
             </button>
           </div>
           {/* Results List */}
-          <div className="space-y-2">
+          <div className="space-y-2 mt-4 sm:mt-6">
             {domainResults.map((domain) => (
               <div
                 key={domain.name}
-                className={`flex items-center justify-between bg-white backdrop-blur-md rounded-[16px] px-[20px] py-[10px] ${
+                className={`flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white backdrop-blur-md rounded-[16px] px-4 sm:px-6 md:px-[20px] py-3 sm:py-[10px] ${
                   domain.name.includes(searchQuery)
-                    ? 'text-green-400 mt-[16px] mb-[16px]'
-                    : 'text-black mt-[8px]'
+                    ? 'text-green-400 mt-4 sm:mt-[16px] mb-4 sm:mb-[16px]'
+                    : 'text-black mt-2 sm:mt-[8px]'
                 }`}
               >
-                <div className="flex items-center align-middle">
+                <div className="flex items-center align-middle mb-2 sm:mb-0">
                   {domain.name.includes(searchQuery) && (
                     <img
                       src={circleCheck}
                       alt="circle check"
-                      className="w-[24px] h-[24px]"
+                      className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px]"
                     />
                   )}
-                  <span className=" text-[18px] font-semibold">
+                  <span className="text-base sm:text-lg md:text-[18px] font-semibold ml-2">
                     {domain.name}
                   </span>
                 </div>
-                <div className="flex items-center">
-                  <div className="text-right">
-                    <div className="text-black text-[18px] font-bold">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center w-full sm:w-auto">
+                  <div className="text-left sm:text-right mb-2 sm:mb-0">
+                    <div className="text-black text-base sm:text-lg md:text-[18px] font-bold">
                       ${domain.price}/yr
                     </div>
-                    <div className="text-sm text-black text-[14px]">
+                    <div className="text-xs sm:text-sm text-black">
                       Service charge ${domain.serviceCharge}
                     </div>
                   </div>
@@ -137,34 +141,33 @@ const DomainSearchResults: React.FC = () => {
                     domain.name.includes(searchQuery) ? (
                       <div
                         onClick={() => handleRegister(domain.name)}
-                        className="relative flex items-center justify-center ml-[16px] px-[20px] py-[14px] text-[18px] text-white rounded-full bg-[#0D4AE7]   font-normal"
+                        className="relative flex items-center justify-center mt-2 sm:mt-0 sm:ml-[16px] px-4 sm:px-6 md:px-[20px] py-2 sm:py-3 md:py-[14px] text-sm sm:text-base md:text-[18px] text-white rounded-full bg-[#0D4AE7] font-normal w-full sm:w-auto"
                       >
                         Register
                         <img
                           src={whiteArrow}
                           alt="white arrow"
-                          className="w-[24px] h-[24px] to-white"
+                          className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] ml-2"
                           color="white"
                         />
                       </div>
                     ) : (
-                      <button
-                        // onClick={() => handleRegister(domain.name)}
-                        className="px-8 py-2  text-black rounded-full flex items-center space-x-2"
-                      >
-                        <span className="border-l pl-[24px] py-[5px]">
+                      <button className="w-full sm:w-auto px-4 sm:px-8 py-2 text-black rounded-full flex items-center justify-between sm:justify-start space-x-2 mt-2 sm:mt-0">
+                        <span className="border-l pl-4 sm:pl-[24px] py-[5px] text-sm sm:text-base">
                           Available
                         </span>
-                        <img
-                          src={circleCheck}
-                          alt="circle check"
-                          className="w-[24px] h-[24px] mr-[10px]"
-                        />
-                        <img
-                          src={blueArrow}
-                          alt="blue arrow"
-                          className="w-[20px] h-[20px]"
-                        />
+                        <div className="flex items-center">
+                          <img
+                            src={circleCheck}
+                            alt="circle check"
+                            className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] mx-2"
+                          />
+                          <img
+                            src={blueArrow}
+                            alt="blue arrow"
+                            className="w-4 h-4 sm:w-5 sm:h-5 md:w-[20px] md:h-[20px]"
+                          />
+                        </div>
                       </button>
                     )
                   ) : (
@@ -176,11 +179,11 @@ const DomainSearchResults: React.FC = () => {
           </div>
 
           {/* Show More Button */}
-          <div className="flex justify-center mt-8">
-            <button className="text-white flex items-center space-x-2">
+          <div className="flex justify-center mt-6 sm:mt-8">
+            <button className="text-white flex items-center space-x-2 text-sm sm:text-base">
               <span>Show More Domains</span>
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 sm:w-5 sm:h-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
