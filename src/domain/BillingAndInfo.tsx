@@ -45,7 +45,7 @@ const DomainRegistration: React.FC = () => {
 
       {/* Main content */}
       <div className="w-[100%] h-[calc(100%-104px)] flex justify-center items-center ">
-        <div className="relative w-full min-w-[400px] h-[640px] ">
+        <div className="relative w-[600px] min-w-[400px] h-[640px] ">
           {/* White card container */}
           <div className=" bg-slate-400 p-[10px] rounded-[30px]">
             <div className="w-full bg-white rounded-[24px] p-[32px] shadow-xl">
